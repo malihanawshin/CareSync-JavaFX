@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.lang.String?>
+<BorderPane xmlns="http://javafx.com/javafx/17.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.healthcareapp.controller.MainController">
+    <top>
+        <Label text="CareSync"
+               style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 20px;" />
+    </top>
+    <center>
+        <VBox spacing="20.0" style="-fx-padding: 20px;">
+            <HBox spacing="10.0">
+                <TextField fx:id="firstNameField" promptText="First Name" />
+                <TextField fx:id="lastNameField" promptText="Last Name" />
+                <DatePicker fx:id="dobPicker" promptText="Date of Birth" />
+            </HBox>
+            <HBox spacing="10.0">
+                <ComboBox fx:id="genderComboBox" promptText="Gender" prefWidth="150.0"/>
+                <TextField fx:id="phoneField" promptText="Phone Number" />
+                <TextField fx:id="emailField" promptText="Email" />
+            </HBox>
+            <TextArea fx:id="addressArea" promptText="Address" prefRowCount="3" />
+            <TextArea fx:id="medicalHistoryArea" promptText="Medical History" prefRowCount="4" />
+            <HBox spacing="10.0">
+                <Button fx:id="addButton" text="Add Patient" onAction="#addPatient"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+                <Button fx:id="updateButton" text="Update Patient" onAction="#updatePatient"
+                        style="-fx-background-color: #2196F3; -fx-text-fill: white;" />
+                <Button fx:id="deleteButton" text="Delete Patient" onAction="#deletePatient"
+                        style="-fx-background-color: #f44336; -fx-text-fill: white;" />
+                <Button fx:id="clearButton" text="Clear Form" onAction="#clearForm" />
+            </HBox>
+            <TableView fx:id="patientTable" prefHeight="300.0">
+                <columns>
+                    <TableColumn fx:id="idColumn" text="ID" prefWidth="50.0" />
+                    <TableColumn fx:id="nameColumn" text="Name" prefWidth="150.0" />
+                    <TableColumn fx:id="dobColumn" text="Date of Birth" prefWidth="120.0" />
+                    <TableColumn fx:id="genderColumn" text="Gender" prefWidth="80.0" />
+                    <TableColumn fx:id="phoneColumn" text="Phone" prefWidth="120.0" />
+                    <TableColumn fx:id="emailColumn" text="Email" prefWidth="150.0" />
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>
+
