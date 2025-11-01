@@ -11,15 +11,14 @@ public class HealthcareApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        // Load login view instead of main view
         FXMLLoader fxmlLoader = new FXMLLoader(
-                HealthcareApplication.class.getResource("/MainView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
+                HealthcareApplication.class.getResource("/LoginView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 500, 500);
 
-        stage.setTitle("CareSync: Healthcare Management System");
+        stage.setTitle("Healthcare Management System - Login");
         stage.setScene(scene);
-        stage.setResizable(true);
-        stage.setMinWidth(800);
-        stage.setMinHeight(600);
+        stage.setResizable(false);
         stage.show();
     }
 

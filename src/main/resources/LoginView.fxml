@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/17.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.healthcareapp.controller.LoginController"
+      alignment="CENTER" spacing="20.0" style="-fx-background-color: #f5f5f5; -fx-padding: 40px;">
+
+    <VBox alignment="CENTER" spacing="15.0" style="-fx-background-color: white; -fx-padding: 40px; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2);" maxWidth="400">
+
+        <Label text="CareSync"
+               style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2196F3;" />
+
+        <Label text="Login"
+               style="-fx-font-size: 16px; -fx-text-fill: #666;" />
+
+        <Separator prefWidth="300" />
+
+        <VBox spacing="10.0">
+            <Label text="Username:" style="-fx-font-weight: bold;" />
+            <TextField fx:id="usernameField" promptText="Enter username" prefWidth="300" />
+        </VBox>
+
+        <VBox spacing="10.0">
+            <Label text="Password:" style="-fx-font-weight: bold;" />
+            <PasswordField fx:id="passwordField" promptText="Enter password" prefWidth="300" />
+        </VBox>
+
+        <Label fx:id="errorLabel" style="-fx-text-fill: red;" wrapText="true" />
+
+        <Button fx:id="loginButton" text="Login" onAction="#handleLogin"
+                prefWidth="300"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10px;" />
+
+        <Label text="Default Login: admin / admin123"
+               style="-fx-font-size: 10px; -fx-text-fill: #999;" />
+    </VBox>
+</VBox>

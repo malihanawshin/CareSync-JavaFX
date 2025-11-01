@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/17.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.healthcareapp.controller.UserRegistrationController"
+      spacing="20.0" style="-fx-padding: 30px;">
+
+    <Label text="Register New User"
+           style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+    <Separator />
+
+    <GridPane hgap="15.0" vgap="15.0">
+        <columnConstraints>
+            <ColumnConstraints minWidth="100.0" prefWidth="150.0" />
+            <ColumnConstraints minWidth="200.0" prefWidth="300.0" hgrow="ALWAYS" />
+        </columnConstraints>
+
+        <!-- Full Name -->
+        <Label text="Full Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+               style="-fx-font-weight: bold;" />
+        <TextField fx:id="fullNameField" promptText="Enter full name"
+                   GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <!-- Username -->
+        <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+               style="-fx-font-weight: bold;" />
+        <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="usernameField" promptText="Enter username" HBox.hgrow="ALWAYS" />
+            <Button fx:id="checkUsernameButton" text="Check" prefWidth="80.0" onAction="#checkUsernameAvailability" />
+        </HBox>
+        <Label fx:id="usernameStatusLabel" style="-fx-text-fill: gray; -fx-font-size: 10px;"
+               GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+        <!-- Email -->
+        <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="3"
+               style="-fx-font-weight: bold;" />
+        <TextField fx:id="emailField" promptText="Enter email address"
+                   GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+        <!-- Role -->
+        <Label text="Role:" GridPane.columnIndex="0" GridPane.rowIndex="4"
+               style="-fx-font-weight: bold;" />
+        <ComboBox fx:id="roleComboBox" prefWidth="300.0"
+                  GridPane.columnIndex="1" GridPane.rowIndex="4">
+        </ComboBox>
+
+        <!-- Password -->
+        <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="5"
+               style="-fx-font-weight: bold;" />
+        <PasswordField fx:id="passwordField" promptText="Enter password (min 8 characters)"
+                       GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <Label fx:id="passwordStrengthLabel" style="-fx-font-size: 10px;"
+               GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+        <!-- Confirm Password -->
+        <Label text="Confirm Password:" GridPane.columnIndex="0" GridPane.rowIndex="7"
+               style="-fx-font-weight: bold;" />
+        <PasswordField fx:id="confirmPasswordField" promptText="Confirm password"
+                       GridPane.columnIndex="1" GridPane.rowIndex="7" />
+
+        <!-- Error/Status Label -->
+        <Label fx:id="errorLabel" wrapText="true" style="-fx-text-fill: red;"
+               GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="8" />
+    </GridPane>
+
+    <Separator />
+
+    <HBox spacing="10.0" style="-fx-alignment: CENTER;">
+        <Button fx:id="registerButton" text="Register User" prefWidth="120.0"
+                onAction="#handleRegister"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 12px;" />
+        <Button fx:id="clearButton" text="Clear" prefWidth="120.0"
+                onAction="#handleClear"
+                style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 12px;" />
+        <Button fx:id="closeButton" text="Close" prefWidth="120.0"
+                onAction="#handleClose"
+                style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 12px;" />
+    </HBox>
+</VBox>
