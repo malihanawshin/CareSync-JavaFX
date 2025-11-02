@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane xmlns="http://javafx.com/javafx/17.0.1"
+         xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="com.example.healthcareapp.controller.AppointmentController"
+         tabClosingPolicy="UNAVAILABLE">
+
+    <!-- Book Appointment Tab -->
+    <tabs>
+        <Tab text="Book Appointment" closable="false">
+            <VBox spacing="20.0" style="-fx-padding: 20px;">
+                <Label text="Book New Appointment"
+                       style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+                <GridPane hgap="15.0" vgap="15.0">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="120.0" prefWidth="150.0" />
+                        <ColumnConstraints minWidth="200.0" prefWidth="250.0" hgrow="ALWAYS" />
+                    </columnConstraints>
+
+                    <!-- Patient Selection -->
+                    <Label text="Patient:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                           style="-fx-font-weight: bold;" />
+                    <ComboBox fx:id="patientComboBox" prefWidth="300.0"
+                              GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                    <!-- Doctor Selection -->
+                    <Label text="Doctor:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                           style="-fx-font-weight: bold;" />
+                    <ComboBox fx:id="doctorComboBox" prefWidth="300.0"
+                              GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                    <!-- Appointment Date -->
+                    <Label text="Date:" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                           style="-fx-font-weight: bold;" />
+                    <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <DatePicker fx:id="appointmentDatePicker" prefWidth="200.0" />
+                        <Button fx:id="checkAvailabilityButton" text="Check Slots" onAction="#checkAvailability" />
+                    </HBox>
+
+                    <!-- Appointment Time -->
+                    <Label text="Time:" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                           style="-fx-font-weight: bold;" />
+                    <ComboBox fx:id="timeComboBox" prefWidth="300.0"
+                              GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                    <!-- Reason -->
+                    <Label text="Reason:" GridPane.columnIndex="0" GridPane.rowIndex="4"
+                           style="-fx-font-weight: bold;" />
+                    <TextArea fx:id="reasonTextArea" promptText="Brief description of visit reason"
+                              prefRowCount="3" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                    <!-- Notes -->
+                    <Label text="Notes:" GridPane.columnIndex="0" GridPane.rowIndex="5"
+                           style="-fx-font-weight: bold;" />
+                    <TextArea fx:id="notesTextArea" promptText="Additional notes (optional)"
+                              prefRowCount="2" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                </GridPane>
+
+                <HBox spacing="10.0" style="-fx-alignment: CENTER;">
+                    <Button fx:id="bookButton" text="Book Appointment" prefWidth="120.0"
+                            onAction="#bookAppointment"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+                    <Button fx:id="clearFormButton" text="Clear" prefWidth="120.0"
+                            onAction="#clearForm"
+                            style="-fx-background-color: #808080; -fx-text-fill: white;" />
+                </HBox>
+
+                <Label fx:id="statusLabel" style="-fx-font-size: 12px; -fx-text-fill: blue;" wrapText="true" />
+            </VBox>
+        </Tab>
+
+        <!-- My Appointments Tab -->
+        <Tab text="My Appointments" closable="false">
+            <VBox spacing="15.0" style="-fx-padding: 20px;">
+                <HBox spacing="10.0" style="-fx-alignment: CENTER;">
+                    <Label text="My Appointments" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                    <Button fx:id="refreshAppointmentsButton" text="Refresh" onAction="#loadMyAppointments"
+                            style="-fx-background-color: #2196F3; -fx-text-fill: white;" />
+                </HBox>
+
+                <TableView fx:id="appointmentsTable" prefHeight="500.0">
+                    <columns>
+                        <TableColumn fx:id="appointmentIdColumn" text="ID" prefWidth="50.0" />
+                        <TableColumn fx:id="patientNameColumn" text="Patient" prefWidth="150.0" />
+                        <TableColumn fx:id="doctorNameColumn" text="Doctor" prefWidth="120.0" />
+                        <TableColumn fx:id="dateTimeColumn" text="Date &amp; Time" prefWidth="150.0" />
+                        <TableColumn fx:id="reasonColumn" text="Reason" prefWidth="200.0" />
+                        <TableColumn fx:id="statusColumn" text="Status" prefWidth="100.0" />
+                        <TableColumn fx:id="actionColumn" text="Actions" prefWidth="150.0" />
+                    </columns>
+                </TableView>
+            </VBox>
+        </Tab>
+
+        <!-- All Appointments Tab (Admin Only) -->
+        <Tab text="All Appointments" fx:id="allAppointmentsTab" closable="false">
+            <VBox spacing="15.0" style="-fx-padding: 20px;">
+                <HBox spacing="10.0" style="-fx-alignment: CENTER;">
+                    <Label text="All Appointments" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                    <ComboBox fx:id="filterStatusComboBox" prefWidth="120.0" promptText="Filter by Status"/>
+                    <DatePicker fx:id="filterDatePicker" promptText="Filter by Date" />
+                    <Button fx:id="filterButton" text="Filter" onAction="#filterAppointments"
+                            style="-fx-background-color: #2196F3; -fx-text-fill: white;" />
+                    <Button fx:id="refreshAllButton" text="Refresh" onAction="#loadAllAppointments"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+                </HBox>
+
+                <TableView fx:id="allAppointmentsTable" prefHeight="400.0">
+                    <columns>
+                        <TableColumn fx:id="allIdColumn" text="ID" prefWidth="50.0" />
+                        <TableColumn fx:id="allPatientColumn" text="Patient" prefWidth="150.0" />
+                        <TableColumn fx:id="allDoctorColumn" text="Doctor" prefWidth="120.0" />
+                        <TableColumn fx:id="allDateTimeColumn" text="Date &amp; Time" prefWidth="150.0" />
+                        <TableColumn fx:id="allReasonColumn" text="Reason" prefWidth="200.0" />
+                        <TableColumn fx:id="allStatusColumn" text="Status" prefWidth="100.0" />
+                        <TableColumn fx:id="allActionColumn" text="Actions" prefWidth="150.0" />
+                    </columns>
+                </TableView>
+            </VBox>
+        </Tab>
+    </tabs>
+</TabPane>

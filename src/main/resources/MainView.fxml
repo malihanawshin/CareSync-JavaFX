@@ -59,6 +59,11 @@
                     </VBox>
                 </Tab>
 
+                <!-- Appointment Management Tab -->
+                <Tab text="Appointments" closable="false">
+                    <fx:include fx:id="appointmentRoot" source="AppointmentView.fxml" />
+                </Tab>
+
                 <!-- Admin Panel Tab (only for Admins) -->
                 <Tab text="Admin Panel" fx:id="adminTab" closable="false">
                     <VBox spacing="15.0" style="-fx-padding: 20px;">
