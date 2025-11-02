@@ -1,5 +1,6 @@
 package com.example.healthcareapp.controller;
 
+import com.example.healthcareapp.Refreshable;
 import com.example.healthcareapp.dao.PatientDAO;
 import com.example.healthcareapp.dao.UserDAO;
 import com.example.healthcareapp.model.Patient;
@@ -76,11 +77,13 @@ public class MainController implements Initializable {
 
     @FXML private TabPane appointmentRoot;   // The root node of included FXML
     @FXML private AppointmentController appointmentRootController;
+    private Refreshable appointmentRefreshListener;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Get logged-in user from session
         currentUser = SessionManager.getInstance().getCurrentUser();
+        appointmentRefreshListener = appointmentRootController;
 
         if (currentUser == null) {
             showAlert("Error", "Please login first", Alert.AlertType.ERROR);
@@ -357,6 +360,10 @@ public class MainController implements Initializable {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/UserRegistrationView.fxml"));
             VBox registrationPane = loader.load();
+
+            // Get controller instance and pass the refresh listener
+            UserRegistrationController userRegController = loader.getController();
+            userRegController.setRefreshListener(appointmentRefreshListener);
 
             Scene scene = new Scene(registrationPane, 600, 600);
             Stage stage = new Stage();

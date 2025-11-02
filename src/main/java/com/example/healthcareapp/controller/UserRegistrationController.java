@@ -1,5 +1,6 @@
 package com.example.healthcareapp.controller;
 
+import com.example.healthcareapp.Refreshable;
 import com.example.healthcareapp.dao.UserDAO;
 import com.example.healthcareapp.model.User;
 import javafx.collections.FXCollections;
@@ -25,6 +26,7 @@ public class UserRegistrationController {
 
     private UserDAO userDAO;
     private boolean usernameAvailable = false;
+    private Refreshable refreshListener;
 
     @FXML
     public void initialize() {
@@ -42,6 +44,10 @@ public class UserRegistrationController {
 
         // Set default role
         roleComboBox.setValue("Doctor");
+    }
+
+    public void setRefreshListener(Refreshable listener) {
+        this.refreshListener = listener;
     }
 
     @FXML
@@ -122,7 +128,9 @@ public class UserRegistrationController {
                                 "Username: " + newUser.getUsername() + "\n" +
                                 "Role: " + newUser.getRole(),
                         Alert.AlertType.INFORMATION);
-
+                if (refreshListener != null) {
+                    refreshListener.refreshDoctors();
+                }
                 handleClear();
                 usernameAvailable = false;
                 usernameStatusLabel.setText("");

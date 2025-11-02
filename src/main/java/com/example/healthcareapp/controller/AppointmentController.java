@@ -1,5 +1,6 @@
 package com.example.healthcareapp.controller;
 
+import com.example.healthcareapp.Refreshable;
 import com.example.healthcareapp.dao.AppointmentDAO;
 import com.example.healthcareapp.dao.PatientDAO;
 import com.example.healthcareapp.dao.UserDAO;
@@ -26,7 +27,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AppointmentController implements Initializable {
+public class AppointmentController implements Initializable, Refreshable {
 
     // Book Appointment Tab Controls
     @FXML private ComboBox<Patient> patientComboBox;
@@ -234,15 +235,7 @@ public class AppointmentController implements Initializable {
 
 
     private void loadDoctors() {
-        doctorList.clear();
-        // Load all active doctors
-        List<User> allUsers = userDAO.getActiveUsers();
-        for (User user : allUsers) {
-            if ("Doctor".equals(user.getRole())) {
-                doctorList.add(user);
-            }
-        }
-        doctorComboBox.setItems(doctorList);
+        refreshDoctors();
         doctorComboBox.setCellFactory(lv -> new ListCell<User>() {
             @Override
             protected void updateItem(User doctor, boolean empty) {
@@ -258,6 +251,18 @@ public class AppointmentController implements Initializable {
             }
         });
     }
+
+    @Override public void refreshDoctors() {
+        doctorList.clear();
+        List<User> allUsers = userDAO.getActiveUsers();
+        for (User user : allUsers) {
+            if ("Doctor".equals(user.getRole())) {
+                doctorList.add(user);
+            }
+        }
+        doctorComboBox.setItems(doctorList);
+    }
+
 
     @FXML
     private void checkAvailability() {
