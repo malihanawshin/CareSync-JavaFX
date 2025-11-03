@@ -14,11 +14,9 @@ CareSync Healthcare Management System (CHMS) is a lightweight desktop applicatio
 - **Search & Filtering**: Dynamic table filtering by status, date range, and name search with real-time updates.
 - **Persistent Storage**: MySQL database integration via JDBC with connection pooling, SQL injection prevention, and automatic data refresh.
 - **Modular Design**: Java 21+ modules with proper access controls for FXML, reflection-based components, and MVC architecture for separation of concerns.
-- **Responsive Layout**: Clean, tabbed dashboard with HBox/VBox layouts, CSS styling for modern appearance, and programmatic chart sizing for optimal desktop viewing.
 - **Error Handling**: Comprehensive exception management with user-friendly alerts, FXML loading error resolution, and controller initialization safeguards.
-- **Cross-Module Integration**: Seamless data synchronization between Patient Management, User Registration, and Appointment Scheduling with controller-to-controller communication.
 
-Future enhancements will include medical record attachments, Dashboard, and UI design improvements.
+Future enhancements will include medical record attachments, Dashboard, UI design improvements, and beyond.
 
 ## Screenshots
 | Patient Management                                                                                                                           |  Appointment Scheduling                                                                                                                             |   Reporting & Analytics                                                                                                                            | Doctor's Dashboard                                                                                                                            |
