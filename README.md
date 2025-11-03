@@ -1,19 +1,24 @@
-# CareSync: Healthcare Management System (HMS)
+# CareSync Healthcare Management System (CHMS)
 
-The Healthcare Management System (HMS) is a lightweight desktop application designed for basic patient record management. It allows healthcare professionals to efficiently create, read, update, and delete patient information, including personal details, contact info, and medical history. This project serves as an educational example of building a modern Java desktop app using JavaFX for the UI and JDBC for database connectivity with MySQL.
-Built for small-scale use, HMS focuses on simplicity, reliability, and extensibility, making it ideal for learning JavaFX, modular programming, and database integration. It follows the MVC (Model-View-Controller) pattern for clean architecture.
+CareSync Healthcare Management System (CHMS) is a lightweight desktop application designed for basic patient record management. It allows healthcare professionals to efficiently create, read, update, and delete patient information, including personal details, contact info, and medical history. CHMS focuses on simplicity, reliability, and extensibility, making it ideal for learning JavaFX, modular programming, and database integration. It follows the MVC (Model-View-Controller) pattern for clean architecture.
 
 ## Features
 
-- **Patient Management**: Full CRUD operations (Create, Read, Update, Delete) for patient records.
-- **Intuitive UI**: JavaFX-based interface with form inputs, TableView for data display, and modal dialogs for confirmations/errors.
-- **Data Validation**: Built-in checks for required fields (e.g., name, date of birth, gender).
-- **Search & Filtering**: Easily view and manage patient lists with dynamic table updates.
-- **Persistent Storage**: MySQL database integration via JDBC for secure, relational data handling.
-- **Modular Design**: Java 21+ modules with proper access controls for FXML and reflection-based components.
-- **Responsive Layout**: Clean, tab-free dashboard with HBox/VBox layouts for optimal desktop viewing.
+- **Patient Management**: Full CRUD operations (Create, Read, Update, Delete) for patient records with role-based access control.
+- **Doctor Management**: Admin-only user registration system for doctors with role assignment and profile management.
+- **Appointment Scheduling**: Comprehensive booking system with patient/doctor dropdowns, status tracking (Scheduled, Completed, Cancelled), and real-time data refresh across modules.
+- **User Authentication**: Secure login/logout system with session management and role-based UI restrictions (Admin vs. Doctor views).
+- **Reporting & Analytics**: Multi-tab dashboard with KPI cards, interactive charts, demographics analysis, appointment trends, doctor performance metrics, and custom report generation.
+- **Intuitive UI**: JavaFX-based interface with FXML-driven layouts, TabPane navigation, TableView for data display, modal dialogs for confirmations/errors, and animated dashboard components.
+- **Data Validation**: Built-in checks for required fields (name, date of birth, gender, email), input sanitization, and duplicate prevention.
+- **Search & Filtering**: Dynamic table filtering by status, date range, and name search with real-time updates.
+- **Persistent Storage**: MySQL database integration via JDBC with connection pooling, SQL injection prevention, and automatic data refresh.
+- **Modular Design**: Java 21+ modules with proper access controls for FXML, reflection-based components, and MVC architecture for separation of concerns.
+- **Responsive Layout**: Clean, tabbed dashboard with HBox/VBox layouts, CSS styling for modern appearance, and programmatic chart sizing for optimal desktop viewing.
+- **Error Handling**: Comprehensive exception management with user-friendly alerts, FXML loading error resolution, and controller initialization safeguards.
+- **Cross-Module Integration**: Seamless data synchronization between Patient Management, User Registration, and Appointment Scheduling with controller-to-controller communication.
 
-Future enhancements could include appointment scheduling, user authentication, reporting, and medical record attachments.
+Future enhancements will include medical record attachments, Dashboard, and UI design improvements.
 
 ## Technologies Used
 
@@ -23,6 +28,11 @@ Future enhancements could include appointment scheduling, user authentication, r
 - **MySQL**: Relational database for patient data storage.
 - **IntelliJ IDEA 2025**: IDE for development (Community or Ultimate Edition).
 - **Maven**: Build tool for dependency management.
+
+## Screenshots
+| Patient Management                                                                                                                           |  Appointment Scheduling                                                                                                                             |   Reporting & Analytics                                                                                                                            | Doctor's Dashboard                                                                                                                            |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| <img width="450" height="350" alt="Login Dashboard" src="https://github.com/user-attachments/assets/732b0249-01b6-432a-9d5e-28817a24dc32" /> | <img width="450" height="350" alt="Patient Management" src="https://github.com/user-attachments/assets/05581768-e29e-4db0-bd41-913f4f00bd3c" /> | <img width="450" height="350" alt="Appointment Scheduling" src="https://github.com/user-attachments/assets/41a2ca42-16e9-4547-bd6b-0c0772f64f74" /> | <img width="450" height="350" alt="Reporting Analytics" src="https://github.com/user-attachments/assets/da641406-a7f1-4442-b158-319a750e3e7c" /> |
 
 ## Prerequisites
 
@@ -70,30 +80,7 @@ cd HealthcareApp
 - Set the main class to `com.example.healthcareapp.HealthcareApplication`.
 - Click Run to launch the application.
 
-## Usage
-1. **Launch the App**: The main window opens with a form for entering patient details and a table for viewing records.
-2. **Add a Patient**: Fill in required fields (First Name, Last Name, Date of Birth, Gender) and click "Add Patient".
-3. **View/Edit**: Select a row in the table to load details into the form, then modify and click "Update Patient".
-4. **Delete**: Select a patient and click "Delete Patient" (with confirmation dialog).
-5. **Clear Form**: Click "Clear Form" to reset inputs.
-
-Sample data entry:
-- First Name: John
-- Last Name: Doe
-- Date of Birth: 1980-05-15
-- Gender: Male
-- Phone: +1-555-0123
-- Email: john.doe@example.com
-- Address: 123 Main St, City, State 12345
-- Medical History: Allergies: Peanuts; Previous conditions: Hypertension
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgements
-
-- Inspired by common hospital management systems and JavaFX tutorials.
-- Thanks to the OpenJFX team for the excellent UI framework.
-- Built with guidance from JetBrains IntelliJ IDEA documentation.
 
