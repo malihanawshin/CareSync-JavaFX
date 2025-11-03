@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane xmlns="http://javafx.com/javafx/17.0.1"
+         xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="com.example.healthcareapp.controller.DashboardController"
+         tabClosingPolicy="UNAVAILABLE">
+
+    <tabs>
+        <!-- Overview Tab -->
+        <Tab text="Overview" closable="false">
+            <VBox spacing="20.0" style="-fx-padding: 20px;">
+                <Label text="Healthcare Analytics Dashboard"
+                       style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2196F3;" />
+
+                <!-- KPI Cards -->
+                <HBox spacing="20.0" style="-fx-alignment: CENTER;">
+                    <VBox fx:id="totalPatientsCard" style="-fx-background-color: white; -fx-padding: 20px; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                        <Label text="Total Patients" style="-fx-font-size: 14px; -fx-text-fill: #666;" />
+                        <Label fx:id="patientsCountLabel" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #4CAF50;" />
+                        <ProgressIndicator fx:id="patientsProgress" progress="0.0" prefWidth="60.0" prefHeight="60.0" />
+                    </VBox>
+
+                    <VBox fx:id="totalAppointmentsCard" style="-fx-background-color: white; -fx-padding: 20px; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                        <Label text="Total Appointments" style="-fx-font-size: 14px; -fx-text-fill: #666;" />
+                        <Label fx:id="appointmentsCountLabel" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #2196F3;" />
+                        <PieChart fx:id="appointmentStatusPie" prefWidth="100.0" prefHeight="100.0">
+                        </PieChart>
+                    </VBox>
+
+                    <VBox fx:id="doctorPerformanceCard" style="-fx-background-color: white; -fx-padding: 20px; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                        <Label text="Doctor Performance" style="-fx-font-size: 14px; -fx-text-fill: #666;" />
+                        <Label fx:id="completionRateLabel" text="0%" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #FF9800;" />
+<!--                        <LineChart fx:id="performanceTrendLine"/>-->
+                    </VBox>
+
+                    <VBox fx:id="avgAgeCard" style="-fx-background-color: white; -fx-padding: 20px; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                        <Label text="Average Patient Age" style="-fx-font-size: 14px; -fx-text-fill: #666;" />
+                        <Label fx:id="avgAgeLabel" text="0 years" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #9C27B0;" />
+<!--                        <BarChart fx:id="ageDistributionBar"/>-->
+                    </VBox>
+                </HBox>
+
+                <!-- Date Range Selection -->
+                <HBox spacing="10.0" style="-fx-alignment: CENTER;">
+                    <Label text="Date Range:" style="-fx-font-weight: bold;" />
+                    <DatePicker fx:id="startDatePicker" />
+                    <Label text="to" style="-fx-padding: 0 10px;" />
+                    <DatePicker fx:id="endDatePicker" />
+                    <Button fx:id="generateReportButton" text="Generate Report" onAction="#generateReport"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+                    <Button fx:id="exportReportButton" text="Export PDF" onAction="#exportToPDF"
+                            style="-fx-background-color: #FF9800; -fx-text-fill: white;" />
+                </HBox>
+
+                <!-- Loading Indicator -->
+                <ProgressBar fx:id="loadingProgress" visible="false" prefWidth="300.0" />
+                <Label fx:id="loadingLabel" visible="false" text="Generating report..."
+                       style="-fx-text-fill: #2196F3; -fx-font-weight: bold;" />
+            </VBox>
+        </Tab>
+
+        <!-- Patient Demographics Tab -->
+        <Tab text="Patient Analytics" closable="false">
+            <VBox spacing="20.0" style="-fx-padding: 20px;">
+                <HBox spacing="10.0" style="-fx-alignment: CENTER;">
+                    <Label text="Patient Demographics" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+                    <ComboBox fx:id="ageGroupComboBox" prefWidth="150.0" promptText="Age Groups">
+                    </ComboBox>
+                    <Button fx:id="generateDemographicsButton" text="Update Chart" onAction="#generateDemographicsReport"
+                            style="-fx-background-color: #2196F3; -fx-text-fill: white;" />
+                </HBox>
+
+                <HBox spacing="20.0">
+                    <PieChart fx:id="genderPieChart" title="Gender Distribution" prefWidth="400.0" prefHeight="300.0">
+                    </PieChart>
+
+<!--                    <BarChart fx:id="ageBarChart" title="Age Distribution">-->
+<!--                    </BarChart>-->
+                </HBox>
+
+                <TableView fx:id="demographicsTable" prefHeight="200.0">
+                    <columns>
+                        <TableColumn fx:id="ageGroupColumn" text="Age Group" prefWidth="100.0" />
+                        <TableColumn fx:id="maleCountColumn" text="Male" prefWidth="80.0" />
+                        <TableColumn fx:id="femaleCountColumn" text="Female" prefWidth="80.0" />
+                        <TableColumn fx:id="otherCountColumn" text="Other" prefWidth="80.0" />
+                        <TableColumn fx:id="totalDemographicsColumn" text="Total" prefWidth="80.0" />
+                        <TableColumn fx:id="percentageColumn" text="\% of Total" prefWidth="100.0" />
+                    </columns>
+                </TableView>
+            </VBox>
+        </Tab>
+
+        <!-- Appointment Analytics Tab -->
+        <Tab text="Appointment Analytics" closable="false">
+            <VBox spacing="20.0" style="-fx-padding: 20px;">
+                <HBox spacing="10.0" style="-fx-alignment: CENTER;">
+                    <Label text="Appointment Trends" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+                    <ComboBox fx:id="appointmentTimeRangeComboBox" prefWidth="150.0" promptText="Time Range">
+                    </ComboBox>
+                    <Button fx:id="generateAppointmentReportButton" text="Update Charts" onAction="#generateAppointmentReport"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+                </HBox>
+
+<!--                <HBox spacing="20.0">-->
+<!--                    <LineChart fx:id="appointmentTrendLine"/>-->
+<!--                    <BarChart fx:id="hourlyAppointmentBar"/>-->
+<!--                </HBox>-->
+
+                <HBox spacing="10.0">
+                    <PieChart fx:id="statusPieChart" title="Appointment Status Distribution" prefWidth="300.0" prefHeight="250.0">
+                    </PieChart>
+
+                    <VBox spacing="10.0">
+                        <Label text="Doctor Performance Ranking" style="-fx-font-weight: bold;" />
+                        <TableView fx:id="doctorRankingTable" prefHeight="200.0">
+                            <columns>
+                                <TableColumn fx:id="doctorNameRankColumn" text="Doctor" prefWidth="150.0" />
+                                <TableColumn fx:id="completionRankColumn" text="Completion %" prefWidth="100.0" />
+                                <TableColumn fx:id="patientCountRankColumn" text="Patients" prefWidth="80.0" />
+                                <TableColumn fx:id="appointmentCountRankColumn" text="Appointments" prefWidth="100.0" />
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </Tab>
+
+        <!-- Custom Reports Tab -->
+        <Tab text="Custom Reports" closable="false">
+            <VBox spacing="20.0" style="-fx-padding: 20px;">
+                <Label text="Custom Report Generator" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+                <HBox spacing="10.0" style="-fx-alignment: CENTER;">
+                    <Label text="Report Type:" />
+                    <ComboBox fx:id="reportTypeComboBox" prefWidth="150.0">
+                    </ComboBox>
+
+                    <Label text="Date Range:" />
+                    <DatePicker fx:id="customStartDatePicker" />
+                    <DatePicker fx:id="customEndDatePicker" />
+
+                    <Button fx:id="generateCustomReportButton" text="Generate Report" onAction="#generateCustomReport"
+                            style="-fx-background-color: #FF9800; -fx-text-fill: white;" />
+                </HBox>
+
+                <!-- Report Preview Area -->
+                <ScrollPane fitToWidth="true">
+                    <VBox fx:id="reportPreviewArea" spacing="10.0">
+                        <Label text="Select a report type to generate" style="-fx-font-size: 16px; -fx-italic: true;" />
+                    </VBox>
+                </ScrollPane>
+
+                <!-- Export Options -->
+                <HBox spacing="10.0" style="-fx-alignment: CENTER;">
+                    <Button fx:id="exportCSVButton" text="Export CSV" onAction="#exportToCSV"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+                    <Button fx:id="exportPDFButton" text="Export PDF" onAction="#exportToPDF"
+                            style="-fx-background-color: #9C27B0; -fx-text-fill: white;" />
+                    <Button fx:id="printReportButton" text="Print Report" onAction="#printReport"
+                            style="-fx-background-color: #607D8B; -fx-text-fill: white;" />
+                </HBox>
+            </VBox>
+        </Tab>
+    </tabs>
+</TabPane>

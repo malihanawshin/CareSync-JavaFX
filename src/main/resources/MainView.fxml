@@ -88,6 +88,13 @@
 
                     </VBox>
                 </Tab>
+
+                <!-- Analytics Tab -->
+                <Tab text="Analytics Dashboard" closable="false">
+                    <fx:include source="DashboardView.fxml" />
+                </Tab>
+
+
             </tabs>
         </TabPane>
     </center>
